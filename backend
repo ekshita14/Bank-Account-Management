@@ -1,0 +1,188 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// Define structure for bank accounts
+typedef struct {
+    char accountHolder[50];
+    int accountNumber;
+    float balance;
+} Account;
+
+// Function prototypes
+void openAccount(Account *acc);
+void deposit(Account *acc, float amount);
+void withdraw(Account *acc, float amount);
+void viewAccount(Account *acc);
+void closeAccount(Account *acc);
+
+int main() {
+    Account savings, fixed, joint, current;
+    int choice, accountType;
+    float amount;
+    
+    // Initialize account numbers
+    savings.accountNumber = 1001;
+    fixed.accountNumber = 1002;
+    joint.accountNumber = 1003;
+    current.accountNumber = 1004;
+
+    while(1) {
+        printf("\nBank Account Management System\n");
+        printf("1. Open Account\n");
+        printf("2. Deposit Money\n");
+        printf("3. Withdraw Money\n");
+        printf("4. View Account Details\n");
+        printf("5. Close Account\n");
+        printf("6. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch(choice) {
+            case 1:
+                printf("\nSelect Account Type:\n1. Savings\n2. Fixed\n3. Joint\n4. Current\n");
+                printf("Enter your choice: ");
+                scanf("%d", &accountType);
+                if (accountType == 1) {
+                    openAccount(&savings);
+                } else if (accountType == 2) {
+                    openAccount(&fixed);
+                } else if (accountType == 3) {
+                    openAccount(&joint);
+                } else if (accountType == 4) {
+                    openAccount(&current);
+                } else {
+                    printf("Invalid option\n");
+                }
+                break;
+            
+            case 2:
+                printf("\nSelect Account Type:\n1. Savings\n2. Fixed\n3. Joint\n4. Current\n");
+                printf("Enter your choice: ");
+                scanf("%d", &accountType);
+                printf("Enter the amount to deposit: ");
+                scanf("%f", &amount);
+                if (accountType == 1) {
+                    deposit(&savings, amount);
+                } else if (accountType == 2) {
+                    deposit(&fixed, amount);
+                } else if (accountType == 3) {
+                    deposit(&joint, amount);
+                } else if (accountType == 4) {
+                    deposit(&current, amount);
+                } else {
+                    printf("Invalid option\n");
+                }
+                break;
+            
+            case 3:
+                printf("\nSelect Account Type:\n1. Savings\n2. Fixed\n3. Joint\n4. Current\n");
+                printf("Enter your choice: ");
+                scanf("%d", &accountType);
+                printf("Enter the amount to withdraw: ");
+                scanf("%f", &amount);
+                if (accountType == 1) {
+                    withdraw(&savings, amount);
+                } else if (accountType == 2) {
+                    withdraw(&fixed, amount);
+                } else if (accountType == 3) {
+                    withdraw(&joint, amount);
+                } else if (accountType == 4) {
+                    withdraw(&current, amount);
+                } else {
+                    printf("Invalid option\n");
+                }
+                break;
+            
+            case 4:
+                printf("\nSelect Account Type:\n1. Savings\n2. Fixed\n3. Joint\n4. Current\n");
+                printf("Enter your choice: ");
+                scanf("%d", &accountType);
+                if (accountType == 1) {
+                    viewAccount(&savings);
+                } else if (accountType == 2) {
+                    viewAccount(&fixed);
+                } else if (accountType == 3) {
+                    viewAccount(&joint);
+                } else if (accountType == 4) {
+                    viewAccount(&current);
+                } else {
+                    printf("Invalid option\n");
+                }
+                break;
+
+            case 5:
+                printf("\nSelect Account Type:\n1. Savings\n2. Fixed\n3. Joint\n4. Current\n");
+                printf("Enter your choice: ");
+                scanf("%d", &accountType);
+                if (accountType == 1) {
+                    closeAccount(&savings);
+                } else if (accountType == 2) {
+                    closeAccount(&fixed);
+                } else if (accountType == 3) {
+                    closeAccount(&joint);
+                } else if (accountType == 4) {
+                    closeAccount(&current);
+                } else {
+                    printf("Invalid option\n");
+                }
+                break;
+
+            case 6:
+                printf("Exiting the program.\n");
+                exit(0);
+
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+
+    return 0;
+}
+
+// Function to open a new account
+void openAccount(Account *acc) {
+    printf("Enter account holder's name: ");
+    scanf(" %[^\n]%*c", acc->accountHolder);  // Takes string input with spaces
+    acc->balance = 0;  // Initially set balance to 0
+    printf("Account opened successfully! Account Number: %d\n", acc->accountNumber);
+}
+
+// Function to deposit money into an account
+void deposit(Account *acc, float amount) {
+    if (amount <= 0) {
+        printf("Invalid deposit amount.\n");
+        return;
+    }
+    acc->balance += amount;
+    printf("Deposited %.2f successfully. New balance: %.2f\n", amount, acc->balance);
+}
+
+// Function to withdraw money from an account
+void withdraw(Account *acc, float amount) {
+    if (amount <= 0) {
+        printf("Invalid withdrawal amount.\n");
+        return;
+    }
+    if (amount > acc->balance) {
+        printf("Insufficient balance for withdrawal.\n");
+    } else {
+        acc->balance -= amount;
+        printf("Withdrawn %.2f successfully. New balance: %.2f\n", amount, acc->balance);
+    }
+}
+
+// Function to view account details
+void viewAccount(Account *acc) {
+    printf("\nAccount Details:\n");
+    printf("Account Holder: %s\n", acc->accountHolder);
+    printf("Account Number: %d\n", acc->accountNumber);
+    printf("Current Balance: %.2f\n", acc->balance);
+}
+
+// Function to close an account
+void closeAccount(Account *acc) {
+    printf("Closing account...\n");
+    acc->balance = 0;  // Reset balance to 0 on account closure
+    printf("Account closed successfully!\n");
+}

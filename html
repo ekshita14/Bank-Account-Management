@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Account Management</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Bank Account Management</h1>
+        <form id="accountForm">
+            <input type="text" id="accountName" placeholder="Account Name" required>
+            <select id="accountType" required>
+                <option value="">Select Account Type</option>
+                <option value="savings">Savings</option>
+                <option value="fixed">Fixed</option>
+                <option value="joint">Joint</option>
+                <option value="current">Current</option>
+            </select>
+            <button type="submit">Create Account</button>
+        </form>
+
+        <div id="accountActions" class="hidden">
+            <h2>Account Actions</h2>
+            <select id="accountSelect"></select>
+            <input type="number" id="amount" placeholder="Amount" required>
+            <button id="depositBtn">Deposit</button>
+            <button id="withdrawBtn">Withdraw</button>
+            <button id="deleteBtn">Delete Account</button>
+        </div>
+
+        <div id="accountList">
+            <h2>Accounts</h2>
+            <ul id="accounts"></ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
